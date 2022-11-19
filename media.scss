@@ -1,0 +1,196 @@
+@media screen and (max-width: 1024px) {
+  .mainParent {
+    grid-template-columns: 150px 1fr;
+  }
+  .mainParent aside .burger svg {
+    width: 30px;
+  }
+  .mainParent aside .nav_menu a li {
+    font-size: 15px;
+  }
+  .mainParent aside .nav_menu a .playlistIcon {
+    margin-right: 15px;
+    height: 27px;
+    width: 27px;
+  }
+  section .controlsPanel .playPauseParent,
+  section .controlsPanel .soundScreen {
+    gap: 13px;
+  }
+  .mainParent aside .nav_menu i,
+  section .controlsPanel .playPauseParent .fa-forward,
+  section .controlsPanel .playPauseParent .fa-backward,
+  section .controlsPanel .soundScreen .fa-expand,
+  section .controlsPanel .soundScreen .fa-volume-high,
+  section .controlsPanel .miniControlsPanel .fa-forward-fast,
+  section .controlsPanel .miniControlsPanel .fa-backward-fast,
+  section .controlsPanel .miniControlsPanel .fa-retweet,
+  section .controlsPanel .miniControlsPanel .fa-stop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+  section .controlsPanel .playPauseParent .playPause {
+    width: 16px;
+    height: 16px;
+  }
+  section .controlsPanel .soundScreen {
+    padding-top: 1.5px;
+  }
+  section .controlsPanel .settings {
+    height: 21px;
+    width: 21px;
+    padding-bottom: 1.5px;
+  }
+  section .controlsPanel .soundScreen .time {
+    font-size: 16px;
+  }
+  section .controlsPanel .miniControlsPanel .speed {
+    font-size: 20px;
+    padding-bottom: 1px;
+  }
+  section .controlsPanel .soundScreen .fa-volume-high .rangeVolume {
+    height: 5px;
+    width: 100px;
+    top: 7px;
+  }
+  section .audio .disk {
+    width: 400px;
+    height: 400px;
+  }
+  .mainParent .videoPlaylist .videoList .videoPlaylistSize {
+    width: 140px;
+    height: 80px;
+  }
+  .mainParent .audioPlaylist .audioList {
+    font-size: 13px;
+  }
+  .mainParent .audioPlaylist .audioList .audioPlaylistSize {
+    font-size: 13px;
+    font-weight: 500;
+  }
+}
+@media screen and (max-width: 768px) {
+  body {
+    padding: 0;
+  }
+  .mainParent {
+    width: 100%;
+    height: 100%;
+    border-radius: 0px;
+    grid-template-columns: 150px 1fr;
+  }
+  .mainParent aside .burger {
+    left: 1.5%;
+    top: 0.5%;
+  }
+  .mainParent aside .nav_menu i {
+    display: none;
+  }
+  section .controlsPanel {
+    padding: 50px 10px 0 10px;
+  }
+  section .controlsPanel .soundScreen .fa-expand {
+    margin-left: 15px;
+  }
+}
+@media screen and (max-width: 600px) {
+  section .audio .disk {
+    width: 300px;
+    height: 300px;
+  }
+  .mainParent {
+    grid-template-columns: 50px 1fr;
+  }
+  section .controlsPanel {
+    flex-wrap: wrap;
+  }
+  section .controlsPanel .range {
+    width: 100%;
+    margin-bottom: 30px;
+    margin-top: 15px;
+  }
+  section .controlsPanel .playPauseParent {
+    margin-left: 3%;
+    gap: 20px;
+  }
+  section .controlsPanel .soundScreen {
+    position: absolute;
+    left: 55%;
+    top: 27%;
+  }
+  section .controlsPanel {
+    padding: 30px 10px 0 10px;
+  }
+  .mainParent .videoPlaylist {
+    position: fixed;
+    left: 11.7%;
+    top: 0%;
+    z-index: 100;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+      linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+      linear-gradient(
+        252.06deg,
+        rgba(67, 47, 47) -5.14%,
+        rgba(255, 255, 255) 50.17%,
+        rgba(67, 47, 47) 95.07%
+      );
+    width: 88%;
+    height: 85%;
+  }
+  .mainParent .videoPlaylist .videoList .videoPlaylistSize {
+    width: 100%;
+    height: 30%;
+  }
+  .mainParent .audioPlaylist{
+    position: fixed;
+    left: 11.7%;
+    top: 0%;
+    z-index: 100;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+      linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+      linear-gradient(
+        252.06deg,
+        rgba(67, 47, 47) -5.14%,
+        rgba(255, 255, 255) 50.17%,
+        rgba(67, 47, 47) 95.07%
+      );
+    width: 88%;
+    height: 85%;
+  }
+}
+@media screen and (max-width: 425px) {
+  section .audio .disk {
+    width: 200px;
+    height: 200px;
+  }
+  section .controlsPanel .playPauseParent {
+    margin-left: 2%;
+    gap: 10px;
+  }
+  section .controlsPanel .soundScreen {
+    position: absolute;
+    left: 35%;
+  }
+  .mainParent .videoPlaylist {
+    width: 88.1%;
+    left: 11.8%;
+  }
+}
+@media screen and (max-width: 375px) {
+  section .controlsPanel .soundScreen {
+    position: absolute;
+    left: 25%;
+  }
+  .mainParent .videoPlaylist {
+    width: 86.7%;
+    left: 13.2%;
+  }
+}
+@media screen and (max-width: 320px) {
+  .mainParent .videoPlaylist {
+    width: 84.4%;
+    left: 15.5%;
+  }
+}

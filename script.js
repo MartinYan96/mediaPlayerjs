@@ -1,0 +1,952 @@
+const navMenu = document.querySelector("nav_menu");
+const mainParent = document.querySelector(".mainParent");
+const video = document.querySelector("video");
+const audio = document.querySelector("audio");
+const audioFrame = document.querySelector(".audio");
+const disk = document.querySelector(".disk");
+const controlsPanel = document.querySelector(".controlsPanel");
+const miniControlsPanel = document.querySelector(".miniControlsPanel");
+const videoFrame = document.querySelector(".videoFrame");
+const videoPlaylist = document.querySelector(".videoPlaylist");
+const burger = document.querySelector(".burger");
+const playPauseParent = document.querySelector(".playPauseParent");
+const playPause = document.querySelector(".playPause");
+const forward = document.querySelector(".fa-forward");
+const backward = document.querySelector(".fa-backward");
+const faBackwardFast = document.querySelector(".fa-backward-fast");
+const faForwardFast = document.querySelector(".fa-forward-fast");
+const expand = document.querySelector(".fa-expand");
+const expandArrowsAlt = document.querySelector(".fa-expand-arrows-alt");
+const contPanelSettingsIcon = document.querySelector(".fa-volume-high");
+const settings = document.querySelector(".settings");
+const stopVid = document.querySelector(".fa-stop");
+let speed = document.querySelector(".speed");
+const audioClick = document.querySelector(".audioClick");
+const videoClick = document.querySelector(".videoClick");
+let time = document.querySelector(".time");
+const rangeVolume = document.querySelector(".rangeVolume");
+const range = document.querySelector(".range");
+const forwardFast = document.querySelector(".forwardFast");
+const backwardFast = document.querySelector(".backwardFast");
+const retweet = document.querySelector(".fa-retweet");
+const audioPlaylist = document.querySelector(".audioPlaylist");
+const playListClick = document.querySelector(".playListClick");
+let retweetBool = false;
+
+// ------------------mediaSize--------------
+
+let media1024max = window.matchMedia("(max-width: 1024px)");
+let media768max = window.matchMedia("(max-width: 768px)");
+let media600max = window.matchMedia("(max-width: 600px)");
+let media425max = window.matchMedia("(max-width: 425px)");
+let media375max = window.matchMedia("(max-width: 375px)");
+let media320max = window.matchMedia("(max-width: 320px)");
+let media1024min = window.matchMedia("(min-width: 1024px)");
+let media600min = window.matchMedia("(min-width: 600px)");
+let media425min = window.matchMedia("(min-width: 425px)");
+let media375min = window.matchMedia("(min-width: 375px)");
+let media320min = window.matchMedia("(min-width: 320px)");
+
+
+
+
+// --------------video--------------
+
+let videoCurrent = 0;
+let currentAudio = 0
+let videoArray = [
+  {
+    videoSrc: "Video/A CHILLA  feat  D LITTE  LINELU ES .mp4",
+    videoName: "A CHILLA  feat  D LITTE  LINELU ES ",
+    videoScreen: "videoimage/1.jpg",
+  },
+  {
+    videoSrc: "Video/KAMI FRIENDS  -Tiknikner.mp4",
+    videoName: "KAMI FRIENDS  -Tiknikner ",
+    videoScreen: "videoimage/2.jpg",
+  },
+  {
+    videoSrc: "Video/Kami Friends  Anapati Arev .mp4",
+    videoName: "Kami Friends  Anapati Arev ",
+    videoScreen: "videoimage/3.jpg",
+  },
+  {
+    videoSrc: "Video/Kami Friends  Arevic .mp4",
+    videoName: "Kami Friends  Arevic",
+    videoScreen: "videoimage/4.jpg",
+  },
+  {
+    videoSrc: "Video/Kami Friends  Yes Arants Qez .mp4",
+    videoName: "Kami Friends  Yes Arants Qez ",
+    videoScreen: "videoimage/5.jpg",
+  },
+  {
+    videoSrc: "Video/Kami Friends Arsen Grigoryan   Chunem Ynkeruhi .mp4",
+    videoName: "Kami Friends Arsen Grigoryan Chunem Ynkeruhi",
+    videoScreen: "videoimage/6.jpg",
+  },
+  {
+    videoSrc: "Video/Kami Friends Harout Pamboukjian  Hishir Sirelis.mp4",
+    videoName: "Kami Friends Harout Pamboukjian TarinerTariner ",
+    videoScreen: "videoimage/7.jpg",
+  },
+  {
+    videoSrc: "Video/Kami Friends Harout Pamboukjian TarinerTariner.mp4",
+    videoName: "Kami Friends Harout Pamboukjian  Hishir Sirelis",
+    videoScreen: "videoimage/8.jpg",
+  },
+  {
+    videoSrc: "Video/Kami Friends Tata Simonyan   Yerevan .mp4",
+    videoName: "Kami Friends Tata Simonyan Yerevan ",
+    videoScreen: "videoimage/9.jpg",
+  },
+  {
+    videoSrc: "Video/Kami Friends Tata Simonyan  Fayton.mp4",
+    videoName: "Kami Friends Tata Simonyan Fayton",
+    videoScreen: "videoimage/10.jpg",
+  },
+  {
+    videoSrc: "Video/Kami Friends Tata Simonyan Terevnery Deghin .mp4",
+    videoName: "Kami Friends Tata Simonyan Terevnery Deghin",
+    videoScreen: "videoimage/11.jpg",
+  },
+];
+
+
+
+
+// --------------audio--------------
+
+let audioArray = [
+  {
+    audioSrc: "music/ARSHO MARTIROSYAN&DANAND BEATS-IM YNKER.mp3",
+    audioName: "Arso Martirosyan - Im ynker",
+    audioScreen: "url('images/1.jpg')",
+  },
+  {
+    audioSrc: "music/Brunette - Bac kapuyt achqerd.mp3",
+    audioName: "Brunette - Bac kapuyt achqerd",
+    audioScreen: "url('images/2.jpg')",
+  },
+  {
+    audioSrc: "music/gorgeouz beats - Black Cat).mp3",
+    audioName: "gorgeouz beats - Black Cat)",
+    audioScreen: "url('images/3.jpg')",
+  },
+  {
+    audioSrc: "music/gorgeouz beats - shushiki.mp3",
+    audioName: "gorgeouz beats - shushiki",
+    audioScreen: "url('images/4.jpg')",
+  },
+  {
+    audioSrc: "music/Grailz Beni - Eugnot).mp3",
+    audioName: "Grailz Beni - Eugnot)",
+    audioScreen: "url('images/5.jpg')",
+  },
+  {
+    audioSrc: "music/hass. - Ararat (Armenian Navy Band Remix).mp3",
+    audioName: "hass. - Ararat (Armenian Navy Band Remix)",
+    audioScreen: "url('images/6.jpg')",
+  },
+  {
+    audioSrc: "music/REINCARNATION feat Harout Pamboukjian-Kancnen Orer.mp3",
+    audioName: "REINCARNATION feat Harout Pamboukjian-Kancnen Orer",
+    audioScreen: "url('images/7.jpg')",
+  },
+  {
+    audioSrc: "music/REINCARNATION-Mardik Beran Chunen.mp3",
+    audioName: "REINCARNATION-Mardik Beran Chunen",
+    audioScreen: "url('images/8.jpg')",
+  },
+  {
+    audioSrc: "music/REINCARNATION-Yerevanyan).mp3",
+    audioName: "REINCARNATION-Yerevanyan",
+    audioScreen: "url('images/9.jpg')",
+  },
+  {
+    audioSrc: "music/էլի ես ու դու - yellowheart.mp3",
+    audioName: "էլի ես ու դու - yellowheart",
+    audioScreen: "url('images/10.jpg')",
+  },
+];
+
+audio.src = audioArray[currentAudio].audioSrc;
+video.src = videoArray[videoCurrent].videoSrc;
+disk.style.backgroundImage = audioArray[currentAudio].audioScreen;
+
+
+
+
+// -------------Global functions------------
+
+function playIcon() {
+  playPause.style.clipPath =
+    "polygon(0 0, 40% 0, 40% 100%, 60% 100%, 60% 0, 100% 0, 100% 100%, 60% 100%, 40% 100%, 0 100%)";
+}
+function pauseIcon() {
+  playPause.style.clipPath =
+    "polygon(0 0, 100% 50%, 30% 41%, 45% 43%, 0 0, 100% 50%, 48% 39%, 43% 42%, 100% 50%, 0 100%)";
+}
+
+
+
+
+// -----------------Video---------------
+
+burger.addEventListener("click", function () {
+  mainParent.classList.toggle("active");
+  if (mainParent.classList.contains("active")) {
+    mainParent.style.gridTemplateColumns = "0px 1fr";
+  }
+  else if (media1024max.matches && media600min.matches) {
+    mainParent.style.gridTemplateColumns = "150px 1fr";
+  }
+  else if (media600max.matches && media320min.matches || media320max.matches) {
+    mainParent.style.gridTemplateColumns = "50px 1fr"
+  }
+  else {
+    mainParent.style.gridTemplateColumns = "200px 1fr"
+  }
+  if (media768max.matches) {
+    expandArrowsAlt.style.display = "none";
+  }
+  else {
+    expandArrowsAlt.style.display = "block"
+  }
+})
+
+
+
+
+// --------------videoClick--------------
+
+videoClick.addEventListener("click", function () {
+  audio.pause();
+  pauseIcon();
+  if (video.played) {
+    playIcon()
+  }
+  if (video.paused) {
+    pauseIcon();
+  }
+
+  videoClick.classList.toggle("active");
+  if (videoClick.classList.contains("active")) {
+    audioClick.classList.remove("active");
+    video.style.display = "block";;
+    audioFrame.style.display = "none";
+  }
+  if (
+    videoClick.classList.contains("active") &&
+    playListClick.classList.contains("active")
+  ) {
+    audioClick.classList.remove("active");
+    videoPlaylist.style.display = "block";
+    audioPlaylist.style.display = "none";
+  }
+  if (videoClick.className == "videoClick" && audioClick.className == "audioClick") {
+    video.style.display = "block";
+    audioFrame.style.display = "none";
+  }
+});
+
+
+
+
+// -------------------audioClick-------------------
+
+audioClick.addEventListener("click", function () {
+  video.pause();
+  pauseIcon();
+  audioClick.classList.toggle("active");
+  if (audioClick.classList.contains("active")) {
+    videoClick.classList.remove("active");
+    video.style.display = "none";
+    audioFrame.style.display = "flex";
+  }
+  if (
+    audioClick.classList.contains("active") &&
+    playListClick.classList.contains("active")
+  ) {
+    videoClick.classList.remove("active");
+    videoPlaylist.style.display = "none";
+    audioPlaylist.style.display = "block";
+  }
+
+  if (videoClick.className == "videoClick" && audioClick.className == "audioClick") {
+    video.style.display = "block";
+    audioFrame.style.display = "none";
+  }
+  if (videoClick.className == "videoClick" && audioClick.className == "audioClick" && playListClick.classList.contains("active")) {
+    videoPlaylist.style.display = "block"
+    audioPlaylist.style.display = "none"
+  }
+  if (audioClick.className == "audioClick" && audio.played) {
+    audio.pause()
+  }
+
+});
+
+
+
+
+// --------------------playlistClick-----------------
+
+playListClick.addEventListener("click", function () {
+  playListClick.classList.toggle("active");
+  if (videoClick.className == "videoClick" && audioClick.className == "audioClick" && playListClick.classList.contains("active")) {
+    audioPlaylist.style.display = "none"
+    videoPlaylist.style.display = "block";
+  }
+  else {
+    audioPlaylist.style.display = "none";
+    videoPlaylist.style.display = "none";
+  }
+  if (playListClick.classList.contains("active") && videoClick.classList.contains("active") && audioClick.className == "audioClick") {
+    audioPlaylist.style.display = "none";
+    videoPlaylist.style.display = "block";
+
+  }
+  else if (playListClick.classList.contains("active") && audioClick.classList.contains("active") && videoClick.className == "videoClick") {
+    audioPlaylist.style.display = "block";
+    videoPlaylist.style.display = "none";
+  }
+  if (playListClick.classList.contains("active")) {
+    expandArrowsAlt.style.display = "none";
+  }
+  else {
+    expandArrowsAlt.style.display = "block";
+  }
+});
+
+
+
+
+// -------------playPause icon---------------
+
+playPause.addEventListener("click", function () {
+  if (video.paused && audio.paused && audioClick.className == "audioClick") {
+    video.play();
+    playIcon()
+  }
+  else if (video.played && audio.paused && audioClick.className == "audioClick") {
+    video.pause()
+    pauseIcon()
+  }
+  else if (audio.paused && audioClick.classList.contains("active")) {
+    video.pause()
+    audio.play()
+    playIcon()
+  }
+  else if (videoClick.className == "videoClick" && audioClick.className == "audioClick" && audio.played) {
+    audio.pause()
+  }
+  else if (audio.played) {
+    audio.pause()
+    pauseIcon()
+  }
+});
+
+
+
+
+// ---------------keybord------------
+
+// -------------------playPause------------------
+
+document.addEventListener("keydown", function (event) {
+  if (event.keyCode == 32 && video.paused && audio.paused && audioClick.className == "audioClick") {
+    video.play();
+    playIcon()
+  }
+  else if (event.keyCode == 32 && video.played && audio.paused && audioClick.className == "audioClick") {
+    video.pause()
+    pauseIcon()
+  }
+  else if (event.keyCode == 32 && audio.paused && audioClick.classList.contains("active")) {
+    video.pause()
+    audio.play()
+    playIcon()
+  }
+  else if (event.keyCode == 32 && videoClick.className == "videoClick" && audioClick.className == "audioClick" && audio.played) {
+    audio.pause()
+  }
+  else if (event.keyCode == 32 && audio.played) {
+    audio.pause()
+    pauseIcon()
+  }
+
+
+
+
+  // ---------------------next---------------------
+
+  if (event.keyCode == 39) {
+    if (audioClick.classList.contains("active")) {
+      currentAudio++
+    }
+    else {
+      videoCurrent++
+    }
+    if (videoCurrent >= videoArray.length) {
+      videoCurrent = 0;
+    }
+    if (currentAudio >= audioArray.length) {
+      currentAudio = 0
+    }
+    if (audioClick.classList.contains("active")) {
+      disk.style.backgroundImage = audioArray[currentAudio].audioScreen;
+      audio.src = audioArray[currentAudio].audioSrc;
+      audio.play();
+      playIcon()
+    }
+    else {
+      video.src = videoArray[videoCurrent].videoSrc;
+      video.play();
+      playIcon()
+    }
+  }
+
+  // ---------------prev----------------
+
+  if (event.keyCode == 37) {
+    if (videoCurrent == -1) {
+      videoCurrent = videoArray.length;
+    }
+    if (audioClick.classList.contains("active") && currentAudio <= -1) {
+      currentAudio = audioArray.length;
+    }
+    if (audioClick.classList.contains("active")) {
+      disk.style.backgroundImage = audioArray[currentAudio].audioScreen;
+      audio.src = audioArray[currentAudio].audioSrc;
+      audio.play();
+      playIcon();
+    }
+    else {
+      video.src = videoArray[videoCurrent].videoSrc;
+      video.play();
+      playIcon();
+    }
+    if (audioClick.classList.contains("active")) {
+      currentAudio--
+    }
+    else {
+      videoCurrent--;
+    }
+  }
+});
+
+// ---------------forward backward start--------------
+
+// ------------forvard-------------
+
+forward.addEventListener("click", function () {
+  if (audioClick.classList.contains("active")) {
+    currentAudio++
+  }
+  else {
+    videoCurrent++
+  }
+  if (videoCurrent >= videoArray.length) {
+    videoCurrent = 0;
+  }
+  if (currentAudio >= audioArray.length) {
+    currentAudio = 0
+  }
+  if (audioClick.classList.contains("active")) {
+    disk.style.backgroundImage = audioArray[currentAudio].audioScreen;
+    audio.src = audioArray[currentAudio].audioSrc;
+    audio.play();
+    playIcon()
+  }
+  else {
+    video.src = videoArray[videoCurrent].videoSrc;
+    video.play();
+    playIcon()
+  }
+});
+
+// ---------------backward-------------
+
+backward.addEventListener("click", function () {
+  if (videoCurrent == -1) {
+    videoCurrent = 10;
+  }
+  if (audioClick.classList.contains("active") && currentAudio <= -1) {
+    currentAudio = 9;
+  }
+  if (audioClick.classList.contains("active")) {
+    disk.style.backgroundImage = audioArray[currentAudio].audioScreen;
+    audio.src = audioArray[currentAudio].audioSrc;
+    audio.play();
+    playIcon();
+  }
+  else {
+    video.src = videoArray[videoCurrent].videoSrc;
+    video.play();
+    playIcon();
+  }
+  if (audioClick.classList.contains("active")) {
+    currentAudio--
+  }
+  else {
+    videoCurrent--;
+  }
+});
+
+
+
+
+// -------------StopVideo------------
+
+stopVid.onclick = function () {
+  if (video.played) {
+    video.pause();
+    video.currentTime = 0;
+    pauseIcon();
+  }
+  if (audio.played) {
+    audio.pause();
+    audio.currentTime = 0;
+    pauseIcon();
+  }
+};
+
+
+
+
+// ---------------------vldeoplayList-----------------
+
+let videoList = document.createElement("ol");
+videoList.style.listStyle = "none";
+videoPlaylist.appendChild(videoList);
+videoList.className = "videoList";
+
+videoArray.forEach((item, index) => {
+  let br = document.createElement("br");
+  videoList.appendChild(br);
+  let indexVideo = document.createElement("li");
+  videoList.appendChild(indexVideo);
+  let name = document.createElement("img");
+  indexVideo.appendChild(name);
+  name.className = "videoPlaylistSize"
+  name.src = videoArray[index].videoScreen;
+  name.style.cursor = "pointer";
+  name.addEventListener("click", () => {
+    videoCurrent = index;
+    video.src = videoArray[videoCurrent].videoSrc;
+    video.play();
+    if (video.played) {
+      video.play();
+      playIcon();
+    } else {
+      video.pause();
+      pauseIcon();
+    }
+  });
+});
+
+// ---------------------audioPlayList-----------------
+
+let audioList = document.createElement("ol");
+audioPlaylist.appendChild(audioList);
+audioList.className = "audioList";
+
+audioArray.forEach((item, index) => {
+  let br = document.createElement("br");
+  audioList.appendChild(br);
+  let indexVideo = document.createElement("li");
+  audioList.appendChild(indexVideo);
+  let name = document.createElement("span");
+  indexVideo.appendChild(name);
+  name.className = "audioPlaylistSize"
+  name.innerText = audioArray[index].audioName;
+  name.style.fontFamily = "sans-serif";
+  name.style.cursor = "pointer";
+  name.addEventListener("click", () => {
+    currentAudio = index;
+    audio.src = audioArray[currentAudio].audioSrc;
+    disk.style.backgroundImage = audioArray[currentAudio].audioScreen;
+    audio.play();
+    if (audio.played) {
+      audio.play();
+      playIcon();
+    } else {
+      audio.pause();
+      pauseIcon();
+    }
+  });
+});
+
+
+// ----------------settings------------
+
+settings.addEventListener("click", () => {
+  miniControlsPanel.classList.toggle("active");
+  if (miniControlsPanel.classList.contains("active")) {
+    miniControlsPanel.style.right = "6px";
+    miniControlsPanel.style.top = "-20px";
+  }
+  else {
+    miniControlsPanel.style.top = "150px";
+  }
+});
+
+// ---------------expand-------------
+
+expand.addEventListener("click", function () {
+  expand.classList.toggle("active");
+  if (expand.classList.contains("active")) {
+    mainParent.style.gridTemplateColumns = "0px 1fr";
+  }
+  if (expand.className == "fas fa-expand" && media1024max.matches && media600min.matches ) {
+    mainParent.style.gridTemplateColumns = "150px 1fr";
+  }
+  else if (expand.className == "fas fa-expand" && media600max.matches && media320min.matches || expand.className == "fas fa-expand" && media320max.matches ) {
+    mainParent.style.gridTemplateColumns = "50px 1fr"
+  }
+  else if (expand.className == "fas fa-expand" && media1024min.matches ){
+    mainParent.style.gridTemplateColumns = "200px 1fr"
+  }
+});
+
+
+// if (media1024max.matches && media600min.matches) {
+//   mainParent.style.gridTemplateColumns = "150px 1fr";
+// }
+// else if (media600max.matches && media320min.matches || media320max.matches) {
+//   mainParent.style.gridTemplateColumns = "50px 1fr"
+// }
+// else {
+//   mainParent.style.gridTemplateColumns = "200px 1fr"
+// }
+
+
+
+
+// -------------videoFrame----------
+
+videoFrame.onmousemove = () => {
+  controlsPanel.classList.toggle("active")
+  if (controlsPanel.classList.contains("active")) {
+    controlsPanel.style.bottom = "0";
+    controlsPanel.style.transition = ".4s";
+
+  }
+};
+
+videoFrame.onmouseleave = () => {
+  controlsPanel.classList.remove("active")
+  if (controlsPanel.className === "controlsPanel") {
+    controlsPanel.style.bottom = "-190px";
+    miniControlsPanel.style.top = "150px";
+    miniControlsPanel.classList.remove("active");
+  }
+};
+
+
+
+
+// ------------VOLUME----------------
+
+rangeVolume.style.display = "none";
+contPanelSettingsIcon.onmousemove = () => {
+  rangeVolume.style.display = "block";
+  contPanelSettingsIcon.style.transform = "rotate(-90deg)";
+  rangeVolume.style.position = "absolute";
+  contPanelSettingsIcon.style.transition = ".3s";
+};
+contPanelSettingsIcon.onmouseleave = () => {
+  setTimeout(() => {
+    contPanelSettingsIcon.style.transform = "rotate(0deg)";
+    rangeVolume.style.display = "none";
+  }, 2000);
+};
+contPanelSettingsIcon.oninput = () => {
+  let vol = rangeVolume.value;
+  video.volume = vol / 100;
+  audio.volume = vol / 100;
+};
+
+
+
+
+// -------------expandArrowsAlt-----------
+
+expandArrowsAlt.addEventListener("click", function () {
+  expandArrowsAlt.classList.toggle("active");
+  if (expandArrowsAlt.classList.contains("active")) {
+    burger.style.top = "20px";
+    mainParent.style.width = "100%";
+    mainParent.style.height = "100%";
+    mainParent.style.borderRadius = "0";
+  } else {
+    burger.style.top = "50px";
+    mainParent.style.width = "80%";
+    mainParent.style.height = "90%";
+    mainParent.style.borderRadius = "30px";
+  }
+});
+
+// -------------progres-------------
+
+video.ontimeupdate = () => {
+  if (video.currentTime > 0) {
+    range.value = (video.currentTime / video.duration) * 100;
+    let minutes = Math.floor(video.currentTime / 60);
+    if (minutes < 10) {
+      minutes = "0" + `${minutes}`;
+    }
+    let seconds = Math.floor(video.currentTime % 60);
+    if (seconds < 10) {
+      seconds = "0" + `${seconds}`;
+    }
+    time.innerHTML = ` ${minutes}:${seconds}`;
+
+    let c = range.value;
+    let rangeTrack =
+      "linear-gradient(to right, rgb(119, 116, 116)" +
+      c +
+      "%, rgb(255,255,255)" +
+      c +
+      "%)";
+    range.style.background = rangeTrack;
+  }
+
+  if (video.ended) {
+    if (retweetBool == true) {
+      video.src = videoArray[videoCurrent].videoSrc;
+      video.play();
+      playIcon();
+    } else {
+      videoCurrent++;
+      if (videoCurrent == videoArray.length) {
+        videoCurrent = 0;
+      }
+      video.src = videoArray[videoCurrent].videoSrc;
+      video.play();
+      playIcon();
+    }
+  }
+  range.oninput = () => {
+    video.currentTime = (range.value * video.duration) / 100;
+  };
+};
+
+audio.addEventListener("timeupdate", () => {
+  if (audio.currentTime > 0) {
+    range.value = (audio.currentTime / audio.duration) * 100;
+    let audioMinutes = Math.floor(audio.currentTime / 60);
+    if (audioMinutes < 10) {
+      audioMinutes = "0" + `${audioMinutes}`;
+    }
+    let audioSeconds = Math.floor(audio.currentTime % 60);
+    if (audioSeconds < 10) {
+      audioSeconds = "0" + `${audioSeconds}`;
+    }
+    time.innerHTML = ` ${audioMinutes}:${audioSeconds}`;
+
+    let c = range.value;
+    let rangeTrack =
+      "linear-gradient(to right, rgb(119, 116, 116)" +
+      c +
+      "%, rgb(255,255,255)" +
+      c +
+      "%)";
+    range.style.background = rangeTrack;
+  }
+  range.oninput = () => {
+    audio.currentTime = (range.value * audio.duration) / 100;
+  };
+  if (audio.ended) {
+    if (retweetBool == true) {
+      audio.src = audioArray[currentAudio].audioSrc;
+      audio.play();
+      playIcon();
+    } else {
+      currentAudio++;
+      if (currentAudio == audioArray.length) {
+        currentAudio = 0;
+      }
+      audio.src = audioArray[currentAudio].audioSrc;
+      audio.play();
+      playIcon();
+    }
+  }
+});
+
+
+
+
+// ---------------VideoSpeed--------------
+
+speed.style.userSelect = "none";
+speed.ondblclick = () => {
+  if (audioClick.classList.contains("active")) {
+    audio.playbackRate = 8;
+    if ((audio.playbackRate = 8)) {
+      speed.style.fontSize = "40px";
+    } else {
+      speed.style.fontSize = "25px";
+    }
+  } else {
+    video.playbackRate = 8;
+    if ((video.playbackRate = 8)) {
+      speed.style.fontSize = "40px";
+    } else {
+      speed.style.fontSize = "25px";
+    }
+  }
+};
+speed.onclick = () => {
+  if (audioClick.classList.contains("active")) {
+    audio.playbackRate = 1;
+    speed.style.fontSize = "25px";
+  } else {
+    video.playbackRate = 1;
+    speed.style.fontSize = "25px";
+  }
+};
+
+
+
+
+// -------------videotTimeSpeed && contols-------------
+
+function forwardFastPlus() {
+  if (audioClick.classList.contains("active")) {
+    audio.currentTime += 20;
+  } else {
+    video.currentTime += 20;
+  }
+}
+function forwardFastMinus() {
+  if (audioClick.classList.contains("active")) {
+    audio.currentTime -= 20;
+  } else {
+    video.currentTime -= 20;
+  }
+}
+function mouseMove() {
+  if (
+    expandArrowsAlt.classList.contains("active") &&
+    audioClick.className == "audioClick"
+  ) {
+    controlsPanel.style.display = "none";
+  }
+}
+function mouseLeave() {
+  if (
+    expandArrowsAlt.classList.contains("active") &&
+    audioClick.className == "audioClick"
+  ) {
+    controlsPanel.style.display = "flex";
+  }
+}
+
+faForwardFast.ondblclick = () => {
+  forwardFastPlus();
+};
+forwardFast.ondblclick = () => {
+  forwardFastPlus();
+};
+
+faBackwardFast.ondblclick = () => {
+  forwardFastMinus();
+};
+backwardFast.ondblclick = () => {
+  forwardFastMinus();
+};
+
+forwardFast.onmousemove = () => {
+  mouseMove();
+};
+forwardFast.onmouseleave = () => {
+  mouseLeave();
+};
+
+backwardFast.onmousemove = () => {
+  mouseMove();
+};
+backwardFast.onmouseleave = () => {
+  mouseLeave();
+};
+
+
+
+
+// -----------display click----------
+
+video.onclick = () => {
+  if (video.paused) {
+    video.play();
+    playIcon()
+  } else {
+    video.pause();
+    pauseIcon();
+  }
+};
+
+
+
+
+// --------------repeat------------
+
+retweet.onclick = () => {
+  if (retweetBool === false) {
+    retweetBool = true;
+  } else if (retweetBool === true) {
+    retweetBool = false;
+  }
+};
+
+if (audioClick.className == "audioClick") {
+  audioFrame.style.display = "none";
+}
+
+
+
+
+// ---------------disk rotate------------
+
+disk.style.transition = ".2s";
+let count = 0;
+let set = setInterval(() => {
+  disk.style.transform = `rotate(${count}deg)`;
+  if (audio.currentTime > 1) {
+    count++;
+  }
+  if (audio.paused || audio.currentTime < 1) {
+    count = 0;
+  }
+}, 100);
+
+
+
+
+// ------------media-----------
+
+function mediaSize() {
+  if (media1024max.matches && media600min.matches) {
+    mainParent.style.gridTemplateColumns = "150px 1fr";
+  }
+  else if (media600max.matches && media320min.matches || media320max.matches) {
+    mainParent.style.gridTemplateColumns = "50px 1fr"
+  }
+  else {
+    mainParent.style.gridTemplateColumns = "200px 1fr"
+  }
+  if (media768max.matches) {
+    expandArrowsAlt.style.display = "none";
+  }
+  else {
+    expandArrowsAlt.style.display = "block"
+  }
+}
+media1024max.addListener(mediaSize);
+media1024min.addListener(mediaSize);
+media768max.addListener(mediaSize);
+media600min.addListener(mediaSize)
+media600max.addListener(mediaSize)
+media320min.addListener(mediaSize)
+media320max.addListener(mediaSize)
