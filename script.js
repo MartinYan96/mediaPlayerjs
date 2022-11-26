@@ -1,3 +1,4 @@
+const body = document.querySelector("body")
 const navMenu = document.querySelector("nav_menu");
 const mainParent = document.querySelector(".mainParent");
 const video = document.querySelector("video");
@@ -24,6 +25,7 @@ let speed = document.querySelector(".speed");
 const audioClick = document.querySelector(".audioClick");
 const videoClick = document.querySelector(".videoClick");
 let time = document.querySelector(".time");
+let time1 = document.querySelector(".time1")
 const rangeVolume = document.querySelector(".rangeVolume");
 const range = document.querySelector(".range");
 const forwardFast = document.querySelector(".forwardFast");
@@ -34,18 +36,18 @@ const playListClick = document.querySelector(".playListClick");
 let retweetBool = false;
 
 // ------------------mediaSize--------------
+let portrait = window.matchMedia("(orientation: portrait)")
+let landscape = window.matchMedia("(orientation: landscape)")
+let media1280HeightMax = window.matchMedia("(max-height: 1280px)")
+let media1000Heightmax = window.matchMedia("(max-height: 1000px)")
+let media900HeightMax = window.matchMedia("(max-height: 900px)")
+let media480HeightMax = window.matchMedia("(max-height: 480px)")
 
-let media1024max = window.matchMedia("(max-width: 1024px)");
-let media768max = window.matchMedia("(max-width: 768px)");
-let media600max = window.matchMedia("(max-width: 600px)");
-let media425max = window.matchMedia("(max-width: 425px)");
-let media375max = window.matchMedia("(max-width: 375px)");
-let media320max = window.matchMedia("(max-width: 320px)");
+let media1280max = window.matchMedia("(max-width: 1280px)");
+let media1000max = window.matchMedia("(max-width: 1000px)")
+let media900max = window.matchMedia("(max-width: 900px)");
+let media480max = window.matchMedia("(max-width: 480px)");
 let media1024min = window.matchMedia("(min-width: 1024px)");
-let media600min = window.matchMedia("(min-width: 600px)");
-let media425min = window.matchMedia("(min-width: 425px)");
-let media375min = window.matchMedia("(min-width: 375px)");
-let media320min = window.matchMedia("(min-width: 320px)");
 
 
 
@@ -119,14 +121,14 @@ let videoArray = [
 
 let audioArray = [
   {
-    audioSrc: "music/ARSHO MARTIROSYAN&DANAND BEATS-IM YNKER.mp3",
-    audioName: "Arso Martirosyan - Im ynker",
-    audioScreen: "url('images/1.jpg')",
-  },
-  {
     audioSrc: "music/Brunette - Bac kapuyt achqerd.mp3",
     audioName: "Brunette - Bac kapuyt achqerd",
     audioScreen: "url('images/2.jpg')",
+  },
+  {
+    audioSrc: "music/ARSHO MARTIROSYAN&DANAND BEATS-IM YNKER.mp3",
+    audioName: "Arso Martirosyan - Im ynker",
+    audioScreen: "url('images/1.jpg')",
   },
   {
     audioSrc: "music/gorgeouz beats - Black Cat).mp3",
@@ -198,20 +200,22 @@ burger.addEventListener("click", function () {
   if (mainParent.classList.contains("active")) {
     mainParent.style.gridTemplateColumns = "0px 1fr";
   }
-  else if (media1024max.matches && media600min.matches) {
-    mainParent.style.gridTemplateColumns = "150px 1fr";
-  }
-  else if (media600max.matches && media320min.matches || media320max.matches) {
+  else if (mainParent.className == "mainParent" && landscape.matches && media1000max.matches && media480HeightMax.matches || mainParent.className == "mainParent" && portrait.matches && media480max.matches && media1000Heightmax) {
     mainParent.style.gridTemplateColumns = "50px 1fr"
+    expandArrowsAlt.style.display = "none"
+  }
+  else if (mainParent.className == "mainParent" && media1280max.matches && media900HeightMax.matches && landscape.matches || mainParent.className == "mainParent" && media1280HeightMax.matches && media900max.matches && portrait.matches) {
+    mainParent.style.gridTemplateColumns = "150px 1fr";
+    expandArrowsAlt.style.display = "none"
   }
   else {
     mainParent.style.gridTemplateColumns = "200px 1fr"
-  }
-  if (media768max.matches) {
-    expandArrowsAlt.style.display = "none";
-  }
-  else {
     expandArrowsAlt.style.display = "block"
+  }
+  if (mainParent.classList.contains("active") && playListClick.classList.contains("active")) {
+    playListClick.classList.remove("active");
+    videoPlaylist.style.display = "none";
+    audioPlaylist.style.display = "none"
   }
 })
 
@@ -314,7 +318,7 @@ playListClick.addEventListener("click", function () {
   if (playListClick.classList.contains("active")) {
     expandArrowsAlt.style.display = "none";
   }
-  else {
+  else if (playListClick.className == "playListClick" && media1024min.matches) {
     expandArrowsAlt.style.display = "block";
   }
 });
@@ -561,7 +565,6 @@ audioArray.forEach((item, index) => {
   indexVideo.appendChild(name);
   name.className = "audioPlaylistSize"
   name.innerText = audioArray[index].audioName;
-  name.style.fontFamily = "sans-serif";
   name.style.cursor = "pointer";
   name.addEventListener("click", () => {
     currentAudio = index;
@@ -577,7 +580,6 @@ audioArray.forEach((item, index) => {
     }
   });
 });
-
 
 // ----------------settings------------
 
@@ -599,27 +601,16 @@ expand.addEventListener("click", function () {
   if (expand.classList.contains("active")) {
     mainParent.style.gridTemplateColumns = "0px 1fr";
   }
-  if (expand.className == "fas fa-expand" && media1024max.matches && media600min.matches ) {
-    mainParent.style.gridTemplateColumns = "150px 1fr";
-  }
-  else if (expand.className == "fas fa-expand" && media600max.matches && media320min.matches || expand.className == "fas fa-expand" && media320max.matches ) {
+  else if (expand.className == "fas fa-expand" && landscape.matches && media1000max.matches && media480HeightMax.matches || expand.className == "fas fa-expand" && portrait.matches && media480max.matches && media1000Heightmax) {
     mainParent.style.gridTemplateColumns = "50px 1fr"
   }
-  else if (expand.className == "fas fa-expand" && media1024min.matches ){
+  else if (expand.className == "fas fa-expand" && media1280max.matches && media900HeightMax.matches && landscape.matches || expand.className == "fas fa-expand" && media1280HeightMax.matches && media900max.matches && portrait.matches) {
+    mainParent.style.gridTemplateColumns = "150px 1fr";
+  }
+  else {
     mainParent.style.gridTemplateColumns = "200px 1fr"
   }
 });
-
-
-// if (media1024max.matches && media600min.matches) {
-//   mainParent.style.gridTemplateColumns = "150px 1fr";
-// }
-// else if (media600max.matches && media320min.matches || media320max.matches) {
-//   mainParent.style.gridTemplateColumns = "50px 1fr"
-// }
-// else {
-//   mainParent.style.gridTemplateColumns = "200px 1fr"
-// }
 
 
 
@@ -638,7 +629,7 @@ videoFrame.onmousemove = () => {
 videoFrame.onmouseleave = () => {
   controlsPanel.classList.remove("active")
   if (controlsPanel.className === "controlsPanel") {
-    controlsPanel.style.bottom = "-190px";
+    controlsPanel.style.bottom = "-210px";
     miniControlsPanel.style.top = "150px";
     miniControlsPanel.classList.remove("active");
   }
@@ -650,18 +641,24 @@ videoFrame.onmouseleave = () => {
 // ------------VOLUME----------------
 
 rangeVolume.style.display = "none";
-contPanelSettingsIcon.onmousemove = () => {
-  rangeVolume.style.display = "block";
-  contPanelSettingsIcon.style.transform = "rotate(-90deg)";
-  rangeVolume.style.position = "absolute";
-  contPanelSettingsIcon.style.transition = ".3s";
-};
-contPanelSettingsIcon.onmouseleave = () => {
-  setTimeout(() => {
+
+contPanelSettingsIcon.onmouseleave = (stop) => {
+  stop = setTimeout(() => {
     contPanelSettingsIcon.style.transform = "rotate(0deg)";
     rangeVolume.style.display = "none";
   }, 2000);
+  contPanelSettingsIcon.onmousemove = () => {
+    rangeVolume.style.display = "block";
+    contPanelSettingsIcon.style.transform = "rotate(-90deg)";
+    rangeVolume.style.position = "absolute";
+    contPanelSettingsIcon.style.transition = ".3s";
+    clearTimeout(stop)
+  };
 };
+
+
+
+
 contPanelSettingsIcon.oninput = () => {
   let vol = rangeVolume.value;
   video.volume = vol / 100;
@@ -676,15 +673,19 @@ contPanelSettingsIcon.oninput = () => {
 expandArrowsAlt.addEventListener("click", function () {
   expandArrowsAlt.classList.toggle("active");
   if (expandArrowsAlt.classList.contains("active")) {
-    burger.style.top = "20px";
+    burger.style.left = "1%";
     mainParent.style.width = "100%";
-    mainParent.style.height = "100%";
     mainParent.style.borderRadius = "0";
-  } else {
-    burger.style.top = "50px";
+    body.style.padding = "0px";
+    burger.style.top = "15px"
+  }
+  else {
+    burger.style.top = "60px";
+    burger.style.left = "11%";
     mainParent.style.width = "80%";
-    mainParent.style.height = "90%";
+    mainParent.style.height = "100%";
     mainParent.style.borderRadius = "30px";
+    body.style.padding = "54px 0";
   }
 });
 
@@ -702,6 +703,7 @@ video.ontimeupdate = () => {
       seconds = "0" + `${seconds}`;
     }
     time.innerHTML = ` ${minutes}:${seconds}`;
+    time1.innerHTML = ` ${minutes}:${seconds}`;
 
     let c = range.value;
     let rangeTrack =
@@ -745,6 +747,7 @@ audio.addEventListener("timeupdate", () => {
       audioSeconds = "0" + `${audioSeconds}`;
     }
     time.innerHTML = ` ${audioMinutes}:${audioSeconds}`;
+    time1.innerHTML = ` ${audioMinutes}:${audioSeconds}`;
 
     let c = range.value;
     let rangeTrack =
@@ -760,6 +763,7 @@ audio.addEventListener("timeupdate", () => {
   };
   if (audio.ended) {
     if (retweetBool == true) {
+      disk.style.backgroundImage = audioArray[currentAudio].audioScreen;
       audio.src = audioArray[currentAudio].audioSrc;
       audio.play();
       playIcon();
@@ -768,6 +772,7 @@ audio.addEventListener("timeupdate", () => {
       if (currentAudio == audioArray.length) {
         currentAudio = 0;
       }
+      disk.style.backgroundImage = audioArray[currentAudio].audioScreen;
       audio.src = audioArray[currentAudio].audioSrc;
       audio.play();
       playIcon();
@@ -792,7 +797,7 @@ speed.ondblclick = () => {
   } else {
     video.playbackRate = 8;
     if ((video.playbackRate = 8)) {
-      speed.style.fontSize = "40px";
+      speed.style.fontSize = "27px";
     } else {
       speed.style.fontSize = "25px";
     }
@@ -830,7 +835,7 @@ function forwardFastMinus() {
 function mouseMove() {
   if (
     expandArrowsAlt.classList.contains("active") &&
-    audioClick.className == "audioClick"
+    audioClick.className == "audioClick" || media1280max && media900HeightMax
   ) {
     controlsPanel.style.display = "none";
   }
@@ -838,20 +843,20 @@ function mouseMove() {
 function mouseLeave() {
   if (
     expandArrowsAlt.classList.contains("active") &&
-    audioClick.className == "audioClick"
+    audioClick.className == "audioClick" || media1280max && media900HeightMax
   ) {
-    controlsPanel.style.display = "flex";
+    controlsPanel.style.display = "grid";
   }
 }
 
-faForwardFast.ondblclick = () => {
+faForwardFast.onclick = () => {
   forwardFastPlus();
 };
 forwardFast.ondblclick = () => {
   forwardFastPlus();
 };
 
-faBackwardFast.ondblclick = () => {
+faBackwardFast.onclick = () => {
   forwardFastMinus();
 };
 backwardFast.ondblclick = () => {
@@ -911,7 +916,7 @@ if (audioClick.className == "audioClick") {
 
 disk.style.transition = ".2s";
 let count = 0;
-let set = setInterval(() => {
+setInterval(() => {
   disk.style.transform = `rotate(${count}deg)`;
   if (audio.currentTime > 1) {
     count++;
@@ -927,26 +932,39 @@ let set = setInterval(() => {
 // ------------media-----------
 
 function mediaSize() {
-  if (media1024max.matches && media600min.matches) {
-    mainParent.style.gridTemplateColumns = "150px 1fr";
-  }
-  else if (media600max.matches && media320min.matches || media320max.matches) {
+  if (media1000max.matches && media480HeightMax.matches && landscape.matches || media480max.matches && media1000Heightmax.matches && portrait.matches) {
     mainParent.style.gridTemplateColumns = "50px 1fr"
+    expandArrowsAlt.style.display = "none";
   }
-  else {
-    mainParent.style.gridTemplateColumns = "200px 1fr"
-  }
-  if (media768max.matches) {
+  else if (media1280max.matches && media900HeightMax.matches && landscape.matches || media1280HeightMax.matches && media900max.matches && portrait.matches) {
+    mainParent.style.gridTemplateColumns = "150px 1fr";
     expandArrowsAlt.style.display = "none";
   }
   else {
+    mainParent.style.gridTemplateColumns = "200px 1fr"
     expandArrowsAlt.style.display = "block"
   }
+  if (media480max.matches) {
+    time1.style.display = "block"
+    time.style.display = "none"
+  }
+  else {
+    time1.style.display = "none"
+    time.style.display = "block"
+  }
+
 }
-media1024max.addListener(mediaSize);
-media1024min.addListener(mediaSize);
-media768max.addListener(mediaSize);
-media600min.addListener(mediaSize)
-media600max.addListener(mediaSize)
-media320min.addListener(mediaSize)
-media320max.addListener(mediaSize)
+
+landscape.addListener(mediaSize)
+portrait.addListener(mediaSize)
+media1280HeightMax.addListener(mediaSize)
+media1000Heightmax.addListener(mediaSize)
+media900HeightMax.addListener(mediaSize)
+media480HeightMax.addListener(mediaSize)
+media1280max.addListener(mediaSize)
+media1000max.addListener(mediaSize)
+media900max.addListener(mediaSize)
+media480max.addListener(mediaSize)
+
+
+

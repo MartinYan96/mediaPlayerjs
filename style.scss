@@ -46,17 +46,16 @@ body {
       width: 50px;
       box-shadow: none;
       position: fixed;
-      top: 6%;
-      left: 11%;
+      top: 60px;
+      left: 10.7%;
       z-index: 90;
     }
-    
+
     .nav_menu {
       display: grid;
       row-gap: 20px;
       list-style: none;
       padding-top: 120px;
-
 
       a {
         width: 100%;
@@ -69,7 +68,6 @@ body {
         .playlistIcon {
           margin-right: 35px;
         }
-
         li {
           color: #fff;
           font-family: sans-serif;
@@ -98,11 +96,12 @@ body {
     list-style-type: square;
     list-style-position: inside;
     color: #c8c8c8;
-    
-    .audioList{
-      .audioPlaylistSize{
+
+    .audioList {
+      .audioPlaylistSize {
         font-size: 15px;
         font-weight: 700;
+        font-family: sans-serif;
       }
     }
   }
@@ -131,11 +130,10 @@ body {
     list-style-type: square;
     list-style-position: inside;
     position: relative;
-    .videoList{
+    .videoList {
       .videoPlaylistSize {
         width: 190px;
         height: 110px;
-
       }
     }
   }
@@ -222,7 +220,9 @@ section {
     position: absolute;
     bottom: 0px;
     left: 0;
-    display: flex;
+    display: grid;
+    grid-template-columns: 130px 1fr 235px;
+    grid-template-rows: 30px;
     justify-content: space-between;
     align-items: center;
     padding: 50px 20px 0 40px;
@@ -265,12 +265,38 @@ section {
         padding-bottom: 0.12px;
         cursor: pointer;
       }
+      .time1{
+        display: none;
+      }
+    }
+    .range {
+      grid-column: 2/3;
+      appearance: none;
+      height: 5px;
+      border-radius: 10px;
+      background-color: #c8c8c8;
+      cursor: pointer;
+      box-shadow: 0 0 4px rgb(139, 163, 173);
+    }
+
+    .range::-webkit-slider-thumb {
+      appearance: none;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: rgb(48, 48, 48);
+    }
+
+    .range::-webkit-slider-thumb:hover {
+      box-shadow: 0 0 2px rgb(139, 163, 173), 0 0 4px rgb(139, 163, 173),
+        0 0 8px rgb(139, 163, 173);
+      transform: scale(1.1);
     }
 
     .miniControlsPanel {
       position: absolute;
       right: 2px;
-      top: 120px;
+      top: 150px;
       width: 180px;
       height: 60px;
       padding: 5px 5px 5px 5px;
@@ -314,7 +340,6 @@ section {
       justify-content: center;
       gap: 15px;
       color: #c8c8c8;
-      width: 250px;
       padding-left: 20px;
       cursor: pointer;
 
@@ -351,44 +376,19 @@ section {
           transform: scale(1.1);
         }
       }
+      .settings {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 5px 0 5px;
+        padding-top: 1px;
+      }
       .fa-expand {
         width: 27px;
         height: 25px;
         font-size: 25px;
         margin-left: 30px;
       }
-    }
-    .settings {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 0 5px 0 5px;
-      padding-top: 1px;
-    }
-
-    .range {
-      appearance: none;
-      min-width: 100px;
-      width: 70%;
-      height: 5px;
-      border-radius: 10px;
-      background-color: #c8c8c8;
-      cursor: pointer;
-      box-shadow: 0 0 4px rgb(139, 163, 173);
-    }
-
-    .range::-webkit-slider-thumb {
-      appearance: none;
-      width: 15px;
-      height: 15px;
-      border-radius: 50%;
-      background-color: rgb(48, 48, 48);
-    }
-
-    .range::-webkit-slider-thumb:hover {
-      box-shadow: 0 0 2px rgb(139, 163, 173), 0 0 4px rgb(139, 163, 173),
-        0 0 8px rgb(139, 163, 173);
-      transform: scale(1.1);
     }
   }
 }
@@ -423,7 +423,8 @@ section {
   margin-left: 6px;
   transition: 0.3s;
 }
-.audioPlaylistSize:hover{
-  text-shadow: 0 0 2px rgb(139, 163, 173),0 0 4px rgb(139, 163, 173),0 0 6px rgb(139, 163, 173);
-  transition: .3s;
+.audioPlaylistSize:hover {
+  text-shadow: 0 0 2px rgb(139, 163, 173), 0 0 4px rgb(139, 163, 173),
+    0 0 6px rgb(139, 163, 173);
+  transition: 0.3s;
 }

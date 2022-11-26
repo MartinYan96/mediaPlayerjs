@@ -43,8 +43,8 @@ body {
   width: 50px;
   box-shadow: none;
   position: fixed;
-  top: 6%;
-  left: 11%;
+  top: 60px;
+  left: 10.7%;
   z-index: 90;
 }
 .mainParent aside .nav_menu {
@@ -94,6 +94,7 @@ body {
 .mainParent .audioPlaylist .audioList .audioPlaylistSize {
   font-size: 15px;
   font-weight: 700;
+  font-family: sans-serif;
 }
 .mainParent .audioPlaylist::-webkit-scrollbar {
   width: 10px;
@@ -189,7 +190,9 @@ section .controlsPanel {
   position: absolute;
   bottom: 0px;
   left: 0;
-  display: flex;
+  display: grid;
+  grid-template-columns: 130px 1fr 235px;
+  grid-template-rows: 30px;
   justify-content: space-between;
   align-items: center;
   padding: 50px 20px 0 40px;
@@ -222,10 +225,36 @@ section .controlsPanel .playPauseParent .fa-forward {
   padding-bottom: 0.12px;
   cursor: pointer;
 }
+section .controlsPanel .playPauseParent .time1 {
+  display: none;
+}
+section .controlsPanel .range {
+  grid-column: 2/3;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  height: 5px;
+  border-radius: 10px;
+  background-color: #c8c8c8;
+  cursor: pointer;
+  box-shadow: 0 0 4px rgb(139, 163, 173);
+}
+section .controlsPanel .range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+          appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: rgb(48, 48, 48);
+}
+section .controlsPanel .range::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 2px rgb(139, 163, 173), 0 0 4px rgb(139, 163, 173), 0 0 8px rgb(139, 163, 173);
+  transform: scale(1.1);
+}
 section .controlsPanel .miniControlsPanel {
   position: absolute;
   right: 2px;
-  top: 120px;
+  top: 150px;
   width: 180px;
   height: 60px;
   padding: 5px 5px 5px 5px;
@@ -268,7 +297,6 @@ section .controlsPanel .soundScreen {
   justify-content: center;
   gap: 15px;
   color: #c8c8c8;
-  width: 250px;
   padding-left: 20px;
   cursor: pointer;
 }
@@ -303,42 +331,18 @@ section .controlsPanel .soundScreen .fa-volume-high .rangeVolume::-webkit-slider
   box-shadow: 0 0 2px rgb(139, 163, 173), 0 0 4px rgb(139, 163, 173), 0 0 8px rgb(139, 163, 173);
   transform: scale(1.1);
 }
-section .controlsPanel .soundScreen .fa-expand {
-  width: 27px;
-  height: 25px;
-  font-size: 25px;
-  margin-left: 30px;
-}
-section .controlsPanel .settings {
+section .controlsPanel .soundScreen .settings {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 5px 0 5px;
   padding-top: 1px;
 }
-section .controlsPanel .range {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  min-width: 100px;
-  width: 70%;
-  height: 5px;
-  border-radius: 10px;
-  background-color: #c8c8c8;
-  cursor: pointer;
-  box-shadow: 0 0 4px rgb(139, 163, 173);
-}
-section .controlsPanel .range::-webkit-slider-thumb {
-  -webkit-appearance: none;
-          appearance: none;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background-color: rgb(48, 48, 48);
-}
-section .controlsPanel .range::-webkit-slider-thumb:hover {
-  box-shadow: 0 0 2px rgb(139, 163, 173), 0 0 4px rgb(139, 163, 173), 0 0 8px rgb(139, 163, 173);
-  transform: scale(1.1);
+section .controlsPanel .soundScreen .fa-expand {
+  width: 27px;
+  height: 25px;
+  font-size: 25px;
+  margin-left: 30px;
 }
 
 .nav_menu > a:hover {
