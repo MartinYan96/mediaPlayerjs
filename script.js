@@ -641,22 +641,25 @@ videoFrame.onmouseleave = () => {
 // ------------VOLUME----------------
 
 rangeVolume.style.display = "none";
-
+function volumeMouseMove() {
+  contPanelSettingsIcon.onmousemove = () => {
+    rangeVolume.style.display = "block";
+    contPanelSettingsIcon.style.transform = "rotate(-90deg)";
+    rangeVolume.style.position = "absolute";
+    contPanelSettingsIcon.style.transition = ".3s";
+  }
+}
+volumeMouseMove()
 contPanelSettingsIcon.onmouseleave = (stop) => {
   stop = setTimeout(() => {
     contPanelSettingsIcon.style.transform = "rotate(0deg)";
     rangeVolume.style.display = "none";
   }, 2000);
   contPanelSettingsIcon.onmousemove = () => {
-    rangeVolume.style.display = "block";
-    contPanelSettingsIcon.style.transform = "rotate(-90deg)";
-    rangeVolume.style.position = "absolute";
-    contPanelSettingsIcon.style.transition = ".3s";
+    volumeMouseMove()
     clearTimeout(stop)
-  };
+  }
 };
-
-
 
 
 contPanelSettingsIcon.oninput = () => {
