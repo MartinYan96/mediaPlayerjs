@@ -89,7 +89,7 @@ body {
           appearance: none;
   list-style-type: square;
   list-style-position: inside;
-  color: #c8c8c8;
+  color: rgb(200, 200, 200);
 }
 .mainParent .audioPlaylist .audioList .audioPlaylistSize {
   font-size: 15px;

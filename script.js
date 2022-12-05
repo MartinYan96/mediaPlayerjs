@@ -788,31 +788,17 @@ audio.addEventListener("timeupdate", () => {
 
 // ---------------VideoSpeed--------------
 
-speed.style.userSelect = "none";
-speed.ondblclick = () => {
-  if (audioClick.classList.contains("active")) {
-    audio.playbackRate = 8;
-    if ((audio.playbackRate = 8)) {
-      speed.style.fontSize = "40px";
-    } else {
-      speed.style.fontSize = "25px";
-    }
-  } else {
-    video.playbackRate = 8;
-    if ((video.playbackRate = 8)) {
-      speed.style.fontSize = "27px";
-    } else {
-      speed.style.fontSize = "25px";
-    }
-  }
-};
+
 speed.onclick = () => {
-  if (audioClick.classList.contains("active")) {
-    audio.playbackRate = 1;
-    speed.style.fontSize = "25px";
+  speed.classList.toggle("active")
+  if (speed.classList.contains("active")) {
+    speed.style.color = "grey";
+    audio.playbackRate = 8;
+    video.playbackRate = 8;
   } else {
+    speed.style.color = "rgb(200, 200, 200)";
     video.playbackRate = 1;
-    speed.style.fontSize = "25px";
+    audio.playbackRate = 1;
   }
 };
 
@@ -903,8 +889,11 @@ video.onclick = () => {
 retweet.onclick = () => {
   if (retweetBool === false) {
     retweetBool = true;
+    retweet.style.color = "grey"
+
   } else if (retweetBool === true) {
     retweetBool = false;
+    retweet.style.color = "rgb(200, 200, 200)"
   }
 };
 
